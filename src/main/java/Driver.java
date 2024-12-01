@@ -1,8 +1,6 @@
-import java.util.*;
-
 public class Driver {
     public static void main(String[] args) {
-        collection binder = new collection();
+        CardBinder binder = new CardBinder();
         binder.add("charmander","common",10);
         binder.add("charmeleon","uncommon",20);
         binder.add("charizard","rare",30);

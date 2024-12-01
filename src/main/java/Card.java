@@ -23,7 +23,6 @@ public class Card implements Comparable<Card> {
                 j--;
             }
             cardArray[j + 1] = key;
-
         }
     }
 
@@ -94,15 +93,11 @@ public class Card implements Comparable<Card> {
     }
 
     public int compareName(Card other) {
-
         return name.compareTo(other.getName());
-
     }
 
     public int comparePrice(Card other) {
-
         return Integer.compare(other.getValue(), value );
-
     }
 
     public int compareBy(String compareBy, Card other){

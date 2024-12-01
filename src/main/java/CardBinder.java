@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class collection {
+public class CardBinder {
     private PriorityQueue<Card> priorityQueue;
     private Map <String,Card> hashmap;
 
-    public collection() {
+    public CardBinder() {
         priorityQueue = new PriorityQueue<>();
         hashmap = new HashMap<>();
     }
@@ -14,22 +14,30 @@ public class collection {
         priorityQueue.add(card);
         hashmap.put(name, card);
     }
-    public void remove(String name){
+
+    public void remove(String name) {
         Card card = hashmap.get(name);
         priorityQueue.remove(card);
         hashmap.remove(name);
-
     }
 
-    public void print(){
+    public Card getFromHashmap(String name){
+        return hashmap.get(name);
+    }
+
+    public Card pullRarestCard() {
+        return priorityQueue.poll();
+    }
+
+    public void print() {
         System.out.println("Cards in Binder.");
         for (Card value : hashmap.values()) {
             System.out.println(value.toString());
         }
     }
 
-    public Card[] sort(String compareBy){
-        Card[] cardArray = (Card[]) hashmap.values().toArray(new Card[hashmap.size()]);
+    public Card[] sort(String compareBy) {
+        Card[] cardArray = hashmap.values().toArray(new Card[hashmap.size()]);
 
         Card.insertionSort(cardArray, compareBy);
 
@@ -40,6 +48,4 @@ public class collection {
         }
         return cardArray;
     }
-
-
 }
