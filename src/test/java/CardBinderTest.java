@@ -60,6 +60,6 @@ public class CardBinderTest {
         Assertions.assertEquals("venasaur",testSomething[0].getName());
 
     }
-    
+
 }
 
