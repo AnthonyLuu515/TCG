@@ -97,7 +97,6 @@ public class Driver {
         valueText.setPreferredSize(new Dimension(250,40));
         valueText.setText("Add card value. Do not add $");
 
-
          common = new JRadioButton("Common");
          uncommon = new JRadioButton("Uncommon");
          rare = new JRadioButton("Rare");
@@ -143,23 +142,18 @@ public class Driver {
 
 
         /**
-         * Columns
+         * TEXT AREA
          */
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("NAME");
-        model.addColumn("VALUE");
-        model.addColumn("RARITY");
-        JTable table = new JTable(model);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumnModel().getColumn(0).setPreferredWidth(50);
-        table.getColumnModel().getColumn(1).setPreferredWidth(50);
-        table.getColumnModel().getColumn(2).setPreferredWidth(50);
-        JScrollPane stuff = new JScrollPane(table);
+        JTextArea stuff = new JTextArea(15,19);
+        stuff.setText("Will be printed to console instead");
+
+
 
         JPanel listPanel = new JPanel();
         listPanel.setBackground(new Color(16, 56, 103));
         listPanel.setBounds(350,160,240,250);
-        listPanel.add(stuff, BorderLayout.CENTER);
+        listPanel.add(stuff);
+
 
         /**
          * ActionListeners
