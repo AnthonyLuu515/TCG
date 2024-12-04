@@ -7,11 +7,17 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+
 public class Driver {
-    private CardBinder binder;
+    public static CardBinder binder;
+    public static ButtonGroup group;
+    private static JRadioButton common;
+    private static JRadioButton uncommon;
+    private static JRadioButton rare;
+    private static JRadioButton ultraRare;
 
     public static void main(String[] args) {
-        CardBinder binder = new CardBinder();
+        binder = new CardBinder();
 
         ImageIcon image = new ImageIcon("src/main/resources/images/pokedex.jpg");
         Border border = BorderFactory.createLineBorder(Color.green,10);
@@ -92,10 +98,10 @@ public class Driver {
         valueText.setText("Add card value. Do not add $");
 
 
-        JRadioButton common = new JRadioButton("Common");
-        JRadioButton uncommon = new JRadioButton("Uncommon");
-        JRadioButton rare = new JRadioButton("Rare");
-        JRadioButton ultraRare = new JRadioButton("Ultra Rare");
+         common = new JRadioButton("Common");
+         uncommon = new JRadioButton("Uncommon");
+         rare = new JRadioButton("Rare");
+         ultraRare = new JRadioButton("Ultra Rare");
 
         ButtonGroup group = new ButtonGroup();
         group.add(common);
@@ -145,9 +151,9 @@ public class Driver {
         model.addColumn("RARITY");
         JTable table = new JTable(model);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        table.getColumnModel().getColumn(0).setPreferredWidth(100);
-        table.getColumnModel().getColumn(1).setPreferredWidth(100);
-        table.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        table.getColumnModel().getColumn(1).setPreferredWidth(50);
+        table.getColumnModel().getColumn(2).setPreferredWidth(50);
         JScrollPane stuff = new JScrollPane(table);
 
         JPanel listPanel = new JPanel();
@@ -158,9 +164,44 @@ public class Driver {
         /**
          * ActionListeners
          */
+        view.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                binder.print();
+            }
+        });
+
+        rarest.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                binder.sort("RARITY");
+            }
+        });
+
+        alphabetical.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    binder.sort("NAME");
+            }
+        });
+
+        value.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    binder.sort("Value");
+            }
+        });
+
+
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameText.getText();
+                binder.remove(name);
+            };
+        });
 
         submit.addActionListener(new ActionListener() {
-            final Driver driver = Driver.this; // Capture 'this' reference
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -173,7 +214,7 @@ public class Driver {
                     // Handle invalid value input (e.g., show an error message)
                     value = 0; // Or set a default value if needed
                 }
-                driver.binder.add(name, rarity, value); // Call Driver's add method
+                binder.add(name, rarity, value); // Call Driver's add method
             }
         });
 
@@ -198,4 +239,17 @@ public class Driver {
 
 
     }
+    private static String getSelectedRarity() {
+        if (common.isSelected()) {
+            return "Common";
+        } else if (uncommon.isSelected()) {
+            return "Uncommon";
+        } else if (rare.isSelected()) {
+            return "Rare";
+        } else if (ultraRare.isSelected()) {
+            return "Ultra Rare";
+        }
+        return null; // or throw an exception if no selection is invalid
+    }
+
 }
