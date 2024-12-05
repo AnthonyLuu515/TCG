@@ -3,7 +3,7 @@ Anthony Luu
 Data Stuctures Final 
 
 12-4-24 
-
+** You'll the /resource/images/pokedex.jpg to open the gui
 TCG Collector 
 Collecting items became bigger during covid and wanted to be able to keep track of what I have.  In which I would like a way to see and sort the collection by name, rarity or by value. 
 
