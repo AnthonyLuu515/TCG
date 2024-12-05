@@ -1,3 +1,10 @@
+/**
+ * Anthony Luu
+ * Data Structures Final Project
+ * 12-5-24
+ *
+ */
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
@@ -7,10 +14,14 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+/**
+ * You'll need to have the src/main/resources/images/pokedex.jpg to access the gui.
+ * Add cards with their name, value, and rarity to the data base binder.
+ * Able to sort the content of the binder with rarity, value or name.
+ */
 
 public class Driver {
     public static CardBinder binder;
-    public static ButtonGroup group;
     private static JRadioButton common;
     private static JRadioButton uncommon;
     private static JRadioButton rare;

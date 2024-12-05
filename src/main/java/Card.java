@@ -9,15 +9,36 @@ public class Card implements Comparable<Card> {
         this.value = value;
     }
 
+    /**
+     *  Switch case to compare by for insertion sort
+     *
+     *
+     */
+    public int compareBy(String compareBy, Card other){
+        switch (compareBy.toUpperCase()) {
+            case "NAME":
+                return compareName(other);
+            case "VALUE":
+                return comparePrice(other);
+            case "RARITY":
+                return compareRarity(other);
+            default:
+                throw new IllegalArgumentException("INVALID OPTION");
+        }
+
+    }
+
+    /**
+     * Insertion sort method to sort whatever switch being used in from the array pulled from map
+     *
+     *
+     */
     public static void insertionSort(Card[] cardArray, String compareBy) {
         int n = cardArray.length;
         for (int i = 1; i < n; ++i) {
             Card key = cardArray[i];
             int j = i - 1;
 
-            // Move elements of cardArray[0..i-1], that are
-            // greater than key, to one position ahead
-            // of their current position
             while (j >= 0 && cardArray[j].compareBy(compareBy, key) > 0) {
                 cardArray[j + 1] = cardArray[j];
                 j--;
@@ -52,13 +73,20 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "name='" + name + '\'' +
-                ", rarity='" + rarity + '\'' +
-                ", value=" + value +
+        return "Card " +
+                " name='" + name + '\'' +
+                ", it's rarity'" + rarity + '\'' +
+                ", and value is" + value +
                 '}'
                 ;
     }
+
+    /**
+     *
+     * comparison between cards
+     *
+     */
+
 
     public int compareRarity(Card other) {
         // Prioritize by rarity (higher rarity first)
@@ -77,6 +105,13 @@ public class Card implements Comparable<Card> {
         return Integer.compare(rarity2Value, rarity1Value); // Higher rarity value first
     }
 
+    /**
+     *
+     * switch case for rarity
+     *
+     */
+
+
     private int getRarityValue(String rarity) {
         switch (rarity.toUpperCase()) {
             case "ULTRA RARE":
@@ -92,6 +127,11 @@ public class Card implements Comparable<Card> {
         }
     }
 
+    /**
+     * Compare methods for name and price
+     *
+     *
+     */
     public int compareName(Card other) {
         return name.compareTo(other.getName());
     }
@@ -100,19 +140,7 @@ public class Card implements Comparable<Card> {
         return Integer.compare(other.getValue(), value );
     }
 
-    public int compareBy(String compareBy, Card other){
-        switch (compareBy.toUpperCase()) {
-            case "NAME":
-                return compareName(other);
-            case "VALUE":
-                return comparePrice(other);
-            case "RARITY":
-                return compareRarity(other);
-            default:
-                throw new IllegalArgumentException("INVALID OPTION");
-        }
 
-    }
 
     @Override
     public int compareTo(Card o) {
